@@ -33,5 +33,8 @@ def stitch(left, right)
 end
 
 list = [6,4,8,3,7,2,9,10,5,1]
-
+start = Time.new.to_f
 print merge_sort(list)
+finish = Time.new.to_f
+puts
+puts "TIME: #{finish - start}"
