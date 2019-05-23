@@ -1,15 +1,17 @@
-def bubble_sort(list)
-  list.each_index do |index_i|
-    list.each_index do |index_j|
-      if list[index_i] < list[index_j]
-        tmp = list[index_i]
-        list[index_i] = list[index_j]
-        list[index_j] = tmp
+def bubble_sort(arr, &prc)
+  length = arr.length
+  while true
+    swapped = false
+    (length - 1).times do |i|
+      if prc.call(arr[i], arr[i + 1]) == 1
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        swapped = true
       end
     end
+    break if !swapped
   end
-  return list
+  arr
 end
 
-list = [6,4,8,3,7,2,9,10,5,1]
-print bubble_sort(list)
+list = [1,6,4,8,3,7,2,9,10,5]
+print bubble_sort(list) {|x, y| x <=> y}
