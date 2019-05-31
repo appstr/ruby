@@ -4,5 +4,4 @@ def factorial(num)
 end
 
 num = 5
-
 puts factorial(num)

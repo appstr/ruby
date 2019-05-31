@@ -20,8 +20,5 @@ def insertion_sort(list)
   list
 end
 
-list = [6,4,8,3,7,2,9,10,5,1]
-print insertion_sort(list)
-
-list = [1,3,2,5,4,6,8,7,9,10]
+list = (1..10000).to_a.shuffle!
 print insertion_sort(list)

@@ -31,5 +31,5 @@ def stitch(left, right)
 end
 
 
-list = [6,4,8,3,7,2,9,10,5,1]
+list = (1..10000).to_a.shuffle!
 p merge_sort(list)

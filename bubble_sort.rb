@@ -13,5 +13,5 @@ def bubble_sort(arr, &prc)
   arr
 end
 
-list = [1,6,4,8,3,7,2,9,10,5]
+list = (1..10000).to_a.shuffle!
 print bubble_sort(list) {|x, y| x <=> y}
