@@ -1,12 +1,4 @@
-class Node
-  attr_accessor :next
-  attr_reader :value
-
-  def initialize(value)
-    @value = value
-    @next = nil
-  end
-end
+require_relative 'node'
 
 class LinkedList
   attr_reader :head
