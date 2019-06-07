@@ -1,31 +1,33 @@
 # Count who is responsible for transmitting the virus most from the 'Original Carrier', even through spreads by its children.
 
 # Constant 'I' is patient-0, the 'Original Carrier' of the virus.
-I = "I"
 
 # The argument variable 'spread' represents who spread the virus to who.
 # spread[0][0] transmitted to spread[0][1]
 # spread[1][0] transmitted to spread[1][1]
 # spread[2][0] transmitted to spread[2][1]
+# etc...
 
 # Example: spread = [['I', 'A'], ['I', 'B'], ['A', 'X'], ['B', 'C'], ['C', 'D'], ['A', 'F'], ['A', 'Z'], ['X', 'Y'], ['D', 'L'], ['Y', 'J']]
+# Explanation: "I" spread to "A", "A" spread to "X", "F", and "Z" directly. The children of "A" spread to "Y" and "J".
 
-# Which letter is NOT the 'Original Carrier' and transmits the virus most to others through direct contanct and children tranmissions?
+# Which letter is NOT the 'Original Carrier'("I"), and transmits the virus most to others through direct contact and children tranmissions?
 
 # The answer is 'A' since it has the most overall transmissions.
 
 # You can assume the virus will be spread in chronological order where
 # children must first be infected before they are able to spead the virus.
 
-def who_spread_the_virus_most?(spread)
+I = "I"
+
+def who_spread_the_virus_most?(virus_spread)
   direct_descendants = []
   # Example: ["A", "B"]
   descendant_spread = []
   # [["A", "X"], ["B", "C"], ["C", "D"], ["A", "F"], ["A", "Z"], ["X", "Y"], ["D", "L"], ["Y", "J"]]
   descendant_tracking = [{}]
   # [{'A' => ['X', 'F', 'Z', 'Y', 'J'], 'B' => ['C', 'D', 'L']}]
-
-  spread.each do |k, v|
+  virus_spread.each do |k, v|
     k == I ? direct_descendants << v : descendant_spread << [k, v]
   end
 
@@ -56,5 +58,5 @@ def who_spread_the_virus_most?(spread)
   largest
 end
 
-my_spread = [['I', 'A'], ['I', 'B'], ['A', 'X'], ['B', 'C'], ['C', 'D'], ['A', 'F'], ['A', 'Z'], ['X', 'Y'], ['D', 'L'], ['Y', 'J']]
-puts who_spread_the_virus_most?(my_spread)
+virus_spread = [['I', 'A'], ['I', 'B'], ['A', 'X'], ['B', 'C'], ['C', 'D'], ['A', 'F'], ['A', 'Z'], ['X', 'Y'], ['D', 'L'], ['Y', 'J']]
+puts who_spread_the_virus_most?(virus_spread)

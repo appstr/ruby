@@ -1,13 +1,14 @@
 def binary_search(arr, target)
   return arr[0] if arr[0] == target
+  return nil if arr.length <= 1
   length = arr.length
-  mid = (length / 2)
+  mid = length / 2
   if arr[mid] > target
-    binary_search(arr.slice(0, mid), target)
-  elsif arr[mid] < target
-    binary_search(arr.slice(mid, length), target)
+    arr = arr.slice(0, mid)
+    binary_search(arr, target)
   else
-    return "FOUND #{target}"
+    arr = arr.slice(mid, length)
+    binary_search(arr, target)
   end
 end
 
