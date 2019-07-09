@@ -122,23 +122,34 @@ class Game
     if pos2 == 0
       # NO TOPS/LEFTS
       # FIRST ELEMENT
-      children << right_indx(pos1, pos2)
-      children << bottom_right_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
+      # BOTTOM_RIGHT:
+      children << index_check(pos1+1, pos2+1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
     elsif pos2 == 8
       # NO TOPS/RIGHTS
       # LAST ELEMENT
-      children << left_indx(pos1, pos2)
-      children << bottom_left_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
+      # BOTTOM_LEFT:
+      children << index_check(pos1+1, pos2-1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
     else
       # NO TOPS
       # MIDDLE ELEMENT
-      children << left_indx(pos1, pos2)
-      children << bottom_left_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
-      children << bottom_right_indx(pos1, pos2)
-      children << right_indx(pos1, pos2)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
+      # BOTTOM_LEFT:
+      children << index_check(pos1+1, pos2-1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
+      # BOTTOM_RIGHT:
+      children << index_check(pos1+1, pos2+1)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
     end
     children.compact
   end
@@ -148,23 +159,34 @@ class Game
     if pos2 == 0
       # FIRST ELEMENT
       # NO BOTTOMS/LEFTS
-      children << top_indx(pos1, pos2)
-      children << top_right_indx(pos1, pos2)
-      children << right_indx(pos1, pos2)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_RIGHT:
+      children << index_check(pos1-1, pos2+1)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
     elsif pos2 == 8
       # LAST ELEMENT
       # NO BOTTOMS/RIGHTS
-      children << top_indx(pos1, pos2)
-      children << top_left_indx(pos1, pos2)
-      children << left_indx(pos1, pos2)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_LEFT:
+      children << index_check(pos1-1, pos2-1)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
     else
       # MIDDLE ELEMENT
       # NO BOTTOMS
-      children << left_indx(pos1, pos2)
-      children << top_left_indx(pos1, pos2)
-      children << top_indx(pos1, pos2)
-      children << top_right_indx(pos1, pos2)
-      children << right_indx(pos1, pos2)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
+      # TOP_LEFT:
+      children << index_check(pos1-1, pos2-1)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_RIGHT:
+      children << index_check(pos1-1, pos2+1)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
     end
     children.compact
   end
@@ -174,64 +196,54 @@ class Game
     if pos2 == 0
       # FIRST ELEMENT
       # NO LEFTS
-      children << top_indx(pos1, pos2)
-      children << top_right_indx(pos1, pos2)
-      children << right_indx(pos1, pos2)
-      children << bottom_right_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_RIGHT:
+      children << index_check(pos1-1, pos2+1)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
+      # BOTTOM_RIGHT:
+      children << index_check(pos1+1, pos2+1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
     elsif pos2 == 8
       # LAST ELEMENT
       # NO RIGHTS
-      children << top_indx(pos1, pos2)
-      children << top_left_indx(pos1, pos2)
-      children << left_indx(pos1, pos2)
-      children << bottom_left_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_LEFT:
+      children << index_check(pos1-1, pos2-1)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
+      # BOTTOM_LEFT:
+      children << index_check(pos1+1, pos2-1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
     else
       # MIDDLE ELEMENT
       # NO RESTRICTIONS
-      children << top_indx(pos1, pos2)
-      children << top_left_indx(pos1, pos2)
-      children << left_indx(pos1, pos2)
-      children << bottom_left_indx(pos1, pos2)
-      children << bottom_indx(pos1, pos2)
-      children << bottom_right_indx(pos1, pos2)
-      children << right_indx(pos1, pos2)
-      children << top_right_indx(pos1, pos2)
+      # TOP:
+      children << index_check(pos1-1, pos2)
+      # TOP_LEFT:
+      children << index_check(pos1-1, pos2-1)
+      # LEFT:
+      children << index_check(pos1, pos2-1)
+      # BOTTOM_LEFT:
+      children << index_check(pos1+1, pos2-1)
+      # BOTTOM:
+      children << index_check(pos1+1, pos2)
+      # BOTTOM_RIGHT:
+      children << index_check(pos1+1, pos2+1)
+      # RIGHT:
+      children << index_check(pos1, pos2+1)
+      # TOP_RIGHT:
+      children << index_check(pos1-1, pos2+1)
     end
     children.compact
   end
 
-  def top_indx(pos1, pos2)
-    !board.grid[pos1 - 1][pos2].revealed ? [pos1 - 1, pos2] : nil
-  end
-
-  def right_indx(pos1, pos2)
-    !board.grid[pos1][pos2 + 1].revealed ? [pos1, pos2 + 1] : nil
-  end
-
-  def left_indx(pos1, pos2)
-    !board.grid[pos1][pos2 - 1].revealed ? [pos1, pos2 - 1] : nil
-  end
-
-  def bottom_left_indx(pos1, pos2)
-    !board.grid[pos1 + 1][pos2 - 1].revealed ? [pos1 + 1, pos2 - 1] : nil
-  end
-
-  def bottom_right_indx(pos1, pos2)
-    !board.grid[pos1 + 1][pos2 + 1].revealed ? [pos1 + 1, pos2 + 1] : nil
-  end
-
-  def top_left_indx(pos1, pos2)
-    !board.grid[pos1 - 1][pos2 - 1].revealed ? [pos1 - 1, pos2 - 1] : nil
-  end
-
-  def top_right_indx(pos1, pos2)
-    !board.grid[pos1 - 1][pos2 + 1].revealed ? [pos1 - 1, pos2 + 1] : nil
-  end
-
-  def bottom_indx(pos1, pos2)
-    !board.grid[pos1 + 1][pos2].revealed ? [pos1 + 1, pos2] : nil
+  def index_check(pos1, pos2)
+    !board.grid[pos1][pos2].revealed ? [pos1, pos2] : nil
   end
 
   def play
