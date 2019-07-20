@@ -11,6 +11,7 @@ end
 
 def stitch(left, right)
   result = []
+
   while !left.empty? and !right.empty?
     if left[0] < right[0]
       result << left.shift
@@ -31,5 +32,5 @@ def stitch(left, right)
 end
 
 
-list = (1..10000).to_a.shuffle!
+list = (1..100000).to_a.shuffle
 p merge_sort(list)

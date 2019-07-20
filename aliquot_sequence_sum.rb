@@ -28,4 +28,4 @@ end
 
 base = 100
 n = 4
-print aliquot_sequence(base, n)
+p aliquot_sequence(base, n)

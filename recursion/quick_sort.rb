@@ -1,17 +1,17 @@
 require_relative 'flatten.rb'
 
-def quick_sort(arr)
+def quick_sort(arr, &prc)
   length = arr.length
   return arr if length <= 1
   left, right = [], []
   pivot = arr[0]
   i = 1
   while i < length
-    arr[i] < pivot ? left << arr[i] : right << arr[i]
+    prc.call(arr[i], pivot) == -1 ? left << arr[i] : right << arr[i]
     i += 1
   end
-  flatten([quick_sort(left), pivot, quick_sort(right)])
+  quick_sort(left, &prc) + [pivot] + quick_sort(right, &prc)
 end
 
-list = (1..10000).to_a.shuffle!
-p quick_sort(list)
+list = (1..100000).to_a.shuffle
+p quick_sort(list){|a,b| b<=>a}

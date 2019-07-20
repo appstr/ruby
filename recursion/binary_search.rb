@@ -1,14 +1,16 @@
 def binary_search(arr, target)
-  return arr[0] if arr[0] == target
-  return nil if arr.length <= 1
+  return nil if arr.empty?
   length = arr.length
   mid = length / 2
-  if arr[mid] > target
-    arr = arr.slice(0, mid)
-    binary_search(arr, target)
+  if arr[mid] == target
+    return mid
+  elsif arr[mid] > target
+    left = arr.slice(0, mid)
+    binary_search(left, target)
   else
-    arr = arr.slice(mid, length)
-    binary_search(arr, target)
+    right = arr.slice(mid+1, length)
+    search_res = binary_search(right, target)
+    search_res.nil? ? nil : search_res+mid+1
   end
 end
 
