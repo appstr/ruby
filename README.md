@@ -1,2 +1,2 @@
 # Ruby
-Ruby practice problems
+Mathematics, Algorithms, Data-Types, and Data-Structures
