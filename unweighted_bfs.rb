@@ -1,5 +1,3 @@
-require 'byebug'
-
 # Node Types:
 S = 'starting_point'
 D = 'destination'
@@ -148,7 +146,7 @@ class Matrix
     @matrix[i][j].adjacent_nodes << [i+1, j] if @matrix[i+1][j].node_type != B
   end
 
-  #Matrix Configuration
+  # Matrix Configuration
 
   def matrix_config(matrix, height, width)
     starting_point = []
@@ -270,6 +268,3 @@ matrix = [
 
 shortest_path = Matrix.new(matrix)
 shortest_path.bfs
-
-# queue = [starting_point]
-# path_and_cost = []
